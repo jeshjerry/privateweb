@@ -1,43 +1,52 @@
-# Simple workflow for deploying static content to GitHub Pages
-name: Deploy static content to Pages
+<html><head>
+<title>Area Calculation</title>
+</head>
 
-on:
-  # Runs on pushes targeting the default branch
-  push:
-    branches: ["main"]
+<body>
+	<h2 color="red">Area Calculation</h2>
+	
+	<label for="radius">Radious of Circle:</label>
+	<input type="number" id="radius"><br><br>
+	
+	<label for="side">Side of Square:</label>
+	<input type="number" id="side"><br><br>
+	
+	
+	<label for="length">Length of Rectangle:</label>
+	<input type="number" id="length"><br><br>
+	
+	
+	<label for="breadth">Breadth of Rectangle:</label>
+	<input type="number" id="breadth"><br><br>
+	
+	<button onclick="calculateArea()">CALCULATE</button><br><br>
+	
+	<p id="result_circle"></p>
+	<p id="result_square"></p>
+	<p id="result_rect"></p>
+	
+	<script>
+		function calculateArea() {
+		
+		var radius=parseFloat(document.getElementById("radius").value); 
+		var side=parseFloat(document.getElementById("side").value);
+		var length=parseFloat(document.getElementById("length").value);
+		var breadth=parseFloat(document.getElementById("breadth").value);
+		
+		var circleArea =Math.PI * radius * radius;
+		var squareArea = side * side;
+		var rectangleArea = length * breadth;
+		
+		var result1 = "AreaOfCircle" + circleArea.toFixed(2);
+		var result2 = "AreaOfSquare" + squareArea.toFixed(2);
+		var result3 = "AreaOfRectangle" + rectangleArea.toFixed(2);
+		
+		document.getElementById("result_circle").innerHTML = result1;
+		document.getElementById("result_square").innerHTML = result2;
+		document.getElementById("result_rect").innerHTML = result3;
+	}
+</script>
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
-permissions:
-  contents: read
-  pages: write
-  id-token: write
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
-jobs:
-  # Single deploy job since we're just deploying
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          # Upload entire repository
-          path: '.'
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+</body></html>
